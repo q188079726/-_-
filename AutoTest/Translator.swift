@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Translator: NSObject {
+struct Translator {
     
     let hanzi = ["零","九","八","七","六","五","四","三","二","一","十","百","千","万","亿","两"]
     let hanziUnits = ["十":10,"百":100,"千":1000,"万":10000,"亿":1_0000_0000]
