@@ -21,7 +21,7 @@ class AutoTestTests: XCTestCase {
         super.tearDown()
     }
     
-    let translator = Translator4()
+    let translator = Translator()
     
     func testExample() {
         // This is an example of a functional test case.

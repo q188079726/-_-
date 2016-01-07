@@ -12,11 +12,10 @@ class Translator: NSObject {
     
     let hanzi = ["零","九","八","七","六","五","四","三","二","一","十","百","千","万","亿","两"]
     let hanziUnits = ["十":10,"百":100,"千":1000,"万":10000,"亿":1_0000_0000]
-//    let hanziNumbers = ["零":0,"九":9,"八":8,"七":7,"六":6,"五":5,"四":4,"三":3,"二":2,"一":1]
     let hanziNumbers = ["零":0,"九":9,"八":8,"七":7,"六":6,"五":5,"四":4,"三":3,"二":2,"一":1,"两":2]
 
     
-    func filterOtherCharactor(inputString: String) -> [String] {
+    private func filterOtherCharactor(inputString: String) -> [String] {
         let filterResult = inputString.characters.flatMap{ (char) -> String? in
             let s: String? = String(char)
             if hanzi.contains(s!) {
@@ -27,101 +26,6 @@ class Translator: NSObject {
         }
         return filterResult
     }
-}
-
-class Translator1: Translator {
-
-    func translate(chineseNumber: String) -> Int {
-     
-        let filterResult = filterOtherCharactor(chineseNumber)
-        
-        var t = 0
-        var total = 0
-        for s in filterResult {
-            if hanziNumbers.keys.contains(s) {
-                //此位为数字 *10 相加
-                t = hanziNumbers[s]!
-                total *= 10
-                total = total + t
-                print("累积",total)
-            }
-            else{
-                //此位为单位,忽略
-            }
-        }
-        return total
-    }
-}
-
-class Translator2: Translator {
-    
-    func translate(chineseNumber: String) -> Int {
-        
-        let filterResult = filterOtherCharactor(chineseNumber)
-        
-        var t = 0
-        var total = 0
-        for (index , s) in filterResult.enumerate() {
-            if index < (filterResult.count - 1) {
-                if hanziNumbers.keys.contains(s) {
-                    //此位为数字
-                    t = hanziNumbers[s]!
-                }
-                else{
-                    //此位为单位,计算
-                    total += t * hanziUnits[s]!
-                }
-            } else {
-                if hanziNumbers.keys.contains(s) {
-                    //此位为数字
-                    t = hanziNumbers[s]!
-                    total += t
-                }
-                else{
-                    //此位为单位,计算
-                    total += t * hanziUnits[s]!
-                }
-            }
-        }
-        return total
-    }
-}
-
-class Translator3: Translator {
-    
-    func translate(chineseNumber: String) -> Int {
-        
-        let filterResult = filterOtherCharactor(chineseNumber)
-        
-        var t = 1
-        var total = 0
-        for (index , s) in filterResult.enumerate() {
-            if index < (filterResult.count - 1) {
-                if hanziNumbers.keys.contains(s) {
-                    //此位为数字
-                    t = hanziNumbers[s]!
-                }
-                else{
-                    //此位为单位,计算
-                    total += t * hanziUnits[s]!
-                }
-            } else {
-                if hanziNumbers.keys.contains(s) {
-                    //此位为数字
-                    t = hanziNumbers[s]!
-                    total += t
-                }
-                else{
-                    //此位为单位,计算
-                    total += t * hanziUnits[s]!
-                }
-            }
-        }
-        return total
-    }
-}
-
-class Translator4: Translator {
     
     func translate(chineseNumber: String) -> Int {
         
